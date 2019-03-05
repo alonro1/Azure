@@ -1,5 +1,5 @@
 # Define variables
-$resourceGroupName = "Backbox-rg"*
+$resourceGroupName = "Backbox-rg"
 $storageaccountname = "backboxstg" + ( -join (1..100 |Get-Random -Count 6))
 $contname = "$storageaccountname-cont"
 $location = read-host "enter location"
