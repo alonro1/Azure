@@ -1,29 +1,42 @@
-# Define variables
-$resourceGroupName = "Backbox-rg"
-$storageaccountname = "backboxstg" + ( -join (1..100 |Get-Random -Count 6))
-$contname = "$storageaccountname-cont"
-$location = read-host "enter location"
-$sourceVHDURI = 'https://backboxstgeastus.blob.core.windows.net/eastus-cont/BackBoxv6tryFixed.vhd'
-$vhd = Split-Path -Leaf $sourceVHDURI 
+    [CmdletBinding()]
+    [Alias()]
+    [OutputType([int])]
+    Param
+    (
+        # VHD source URI
+        $sourceVHDURI = 'https://stgbbeu.blob.core.windows.net/bbcontainer/BackBoxv6tryFixed.vhd',
+        
+        # VHD sas token
+        $sasToken = 'sp=r&st=2019-03-04T13:55:31Z&se=2025-01-01T21:55:31Z&spr=https&sv=2018-03-28&sig=HbcCGYGdDIhs3Mv9ZmnaKPKhhr6YI4ST8EC8Z254i3U%3D&sr=b'
+    )
+    
+    
+    $location= read-host "Please enter location"
+    $ErrorActionPreference = 'stop'
+    $resourceGroupName = "Backbox-rg"
+    $storageaccountname = "backboxstg" + ( -join (1..100 |Get-Random -Count 6))
+    $contname = "$storageaccountname-cont"
+    $vhd = Split-Path -Leaf $sourceVHDURI 
+   
+    if (!(Get-AzureRmResourceGroup -name $resourceGroupName -ErrorAction SilentlyContinue )) {
+        write-output "Creating New Resource group: $resourceGroupName"
+        $RG = New-AzureRmResourceGroup -Name $resourceGroupName -Location $location
+    } else {$RG = Get-AzureRmResourceGroup -name $resourceGroupName}
+    
+    write-output "Creating New Storageaccount: $storageaccountname"
+    $stg = New-AzureRmStorageAccount -ResourceGroupName $rg.ResourceGroupName -Name $storageaccountname -SkuName Standard_LRS -Location $location -Kind StorageV2 -AccessTier Cool
+    write-output "Creating New Container: $contname"
+    $cont = New-AzureRmStorageContainer -StorageAccountName $storageaccountname -ResourceGroupName $rg.ResourceGroupName -Name $contname
 
-if (!(Get-AzureRmResourceGroup -name $resourceGroupName -ErrorAction SilentlyContinue )) {
-    $RG = New-AzureRmResourceGroup -Name $resourceGroupName -Location $location
-} else {$RG = Get-AzureRmResourceGroup -name $resourceGroupName}
+    Write-Output "Start Time: $(get-date)"
+    Write-Output "Start copy backbox VHD"
 
-$stg = New-AzureRmStorageAccount -ResourceGroupName $rg.ResourceGroupName -Name $storageaccountname -SkuName Standard_LRS -Location $location -Kind StorageV2 -AccessTier Cool
-$cont = New-AzureRmStorageContainer -StorageAccountName $storageaccountname -ResourceGroupName $rg.ResourceGroupName -Name $contname
+    $blob = Start-AzureStorageBlobCopy -AbsoluteUri ($sourceVHDURI + "?" + $sasToken) -DestContainer $cont.Name -DestBlob $vhd -DestContext $stg.Context
+    $blob| Get-AzureStorageBlobCopyState
 
-Write-Output "Start Time: $(get-date)"
-Write-Output "Start copy backbox VHD"
+    Do {Write-Output "copy status is: $(($blob| Get-AzureStorageBlobCopyState).Status)"; sleep -Seconds 10} Until (($blob| Get-AzureStorageBlobCopyState).Status -ne "Pending")
+    Write-Output "End Time: $(get-date)"
 
-$blob = Start-AzureStorageBlobCopy -AbsoluteUri $sourceVHDURI  -DestContainer $cont.Name -DestBlob $vhd -DestContext $stg.Context
-$blob| Get-AzureStorageBlobCopyState
-
-Do {Write-Output "copy status is: $(($blob| Get-AzureStorageBlobCopyState).Status)"; sleep -Seconds 10} Until (($blob| Get-AzureStorageBlobCopyState).Status -ne "Pending")
-Write-Output "End Time: $(get-date)"
-
-#$sas = New-AzureStorageBlobSASToken -Container $cont.Name -Blob $blob -Context $stg.Context -ExpiryTime 10000 -Permission rwd
-$newUri = "$($blob.context.BlobEndPoint)" + "$($cont.name)/" + "$vhd" #+ $sas
-
-Write-Output "New URI: $newUri"   
+    $newUri = "$($blob.context.BlobEndPoint)" + "$($cont.name)/" + "$vhd" #+ $sas
+    Write-Output "New URI: $newUri"  
 
