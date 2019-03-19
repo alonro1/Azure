@@ -4,10 +4,10 @@
     Param
     (
         # VHD source URI
-        $sourceVHDURI = 'https://stgbbeu.blob.core.windows.net/bbcontainer/BackBoxv6tryFixed.vhd',
+        $sourceVHDURI = 'https://bbimage.blob.core.windows.net/bbcontainer/BackBoxv6tryFixed.vhd',
         
         # VHD sas token
-        $sasToken = 'sp=r&st=2019-03-04T13:55:31Z&se=2025-01-01T21:55:31Z&spr=https&sv=2018-03-28&sig=HbcCGYGdDIhs3Mv9ZmnaKPKhhr6YI4ST8EC8Z254i3U%3D&sr=b'
+        $sasToken = 'sp=rcw&st=2019-03-19T13:48:54Z&se=2019-05-31T20:48:54Z&spr=https&sv=2018-03-28&sig=Xv8FQDtc%2FX0TMT9478riJsbz9CP5w5BMeeGqoBOM0f4%3D&sr=b'
     )
     
     
