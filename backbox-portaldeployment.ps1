@@ -7,7 +7,7 @@
         $sourceVHDURI = 'https://bbimage.blob.core.windows.net/bbcontainer/BackBoxv6tryFixed.vhd',
         
         # VHD sas token
-        $sasToken = 'sp=rcw&st=2019-03-19T13:48:54Z&se=2019-05-31T20:48:54Z&spr=https&sv=2018-03-28&sig=Xv8FQDtc%2FX0TMT9478riJsbz9CP5w5BMeeGqoBOM0f4%3D&sr=b'
+        $sasToken = 'sp=r&st=2019-03-19T15:35:23Z&se=2019-05-30T22:35:23Z&spr=https&sv=2018-03-28&sig=WgLsh%2B6WNBnvav5nsjiiOY0zHrLZZalZi69sT4sebPw%3D&sr=b'
     )
     
     
