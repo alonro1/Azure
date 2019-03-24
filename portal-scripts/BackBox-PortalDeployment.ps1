@@ -7,7 +7,7 @@
         $sourceVHDURI = 'https://backboxstg596266438834.blob.core.windows.net/backboxstg596266438834-cont/BackBoxv6tryFixed.vhd',
         
         # VHD sas token
-        $sasToken = 'sp=r&st=2019-03-20T13:20:04Z&se=2019-03-20T21:20:04Z&spr=https&sv=2018-03-28&sig=c35dNk0OrKvEjNIPCWlrkA3m6srt1sbLItHvPu0wajM%3D&sr=b'
+        $sasToken = 'https://backboxstg596266438834.blob.core.windows.net/backboxstg596266438834-cont/BackBoxv6tryFixed.vhd?sp=rcwd&st=2019-03-24T15:09:11Z&se=2019-04-29T22:09:11Z&spr=https&sv=2018-03-28&sig=3UC4tlXZudMzIzi6KAjPcc5AJiQRmvOet1CdZJJjZlE=&sr=b'
     )
     
     
