@@ -4,7 +4,7 @@
     Param
     (
         # VHD source URI
-        $sourceVHDURI = 'https://alon111.blob.core.windows.net/bbimage/BackBoxv6tryFixed.vhd',
+        $sourceVHDURI = 'https://alon111.blob.core.windows.net/bbimage/newVHDimage.vhd',
         
         # VHD sas token
         $sasToken = 'sp=rcw&st=2019-10-31T08:32:37Z&se=2020-10-31T16:32:37Z&spr=https&sv=2019-02-02&sr=b&sig=PxjGxKWG1mD3jS8DQWHa9Rbv%2FoHs0JgQlD2rtWh4bBw%3D'
