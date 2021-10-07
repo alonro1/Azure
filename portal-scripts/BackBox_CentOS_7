@@ -4,10 +4,10 @@
     Param
     (
         # VHD source URI
-        $sourceVHDURI = 'https://alon1111.blob.core.windows.net/imagestore/BackBox_CentOS-7.vhd',
+        $sourceVHDURI = 'https://alon1111.blob.core.windows.net/imagestore/VMDIskNEW.vhd',
         
         # VHD sas token
-        $sasToken = 'sp=r&st=2021-10-07T00:33:32Z&se=2022-10-07T08:33:32Z&spr=https&sv=2020-08-04&sr=b&sig=lNaKd9qpjEcdQsrH%2FtORGvjq%2BiXJaYuLSCDgbV3sK2Y%3D'
+        $sasToken = 'sp=r&st=2021-10-07T09:32:44Z&se=2021-10-07T17:32:44Z&spr=https&sv=2020-08-04&sr=b&sig=tsAcWCMDz83DLUcRIaWlqtWmir%2BTprBgGDOI9d0VRuc%3D'
     )
     
     
