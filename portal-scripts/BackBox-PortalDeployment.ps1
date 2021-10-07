@@ -7,7 +7,7 @@
         $sourceVHDURI = 'https://alon1111.blob.core.windows.net/imagestore/newVHDimage.vhd',
         
         # VHD sas token
-        $sasToken = 'sp=r&st=2021-10-05T11:21:18Z&se=2022-10-05T19:21:18Z&spr=https&sv=2020-08-04&sr=b&sig=tFtonV8zXcAOVXkF99zWt240%2B%2BOAautJQMP7EmOQp8g%3D'
+        $sasToken = 'sp=r&st=2021-10-07T04:43:11Z&se=2022-10-07T12:43:11Z&spr=https&sv=2020-08-04&sr=b&sig=PAdfZQOpVnnDMee3ihZd4qmfZ8B4By%2BY2lYWQ2qGNAI%3D'
     )
     
     
