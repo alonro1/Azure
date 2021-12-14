@@ -14,7 +14,7 @@
     $location= read-host "Please enter location"
     $ErrorActionPreference = 'stop'
     $resourceGroupName = "Backbox-rg"
-    $storageaccountname = "backboxstg" + ( -join (1..100 |Get-Random -Count 6))
+    $storageaccountname = "backboxstg93885105751"
     $contname = "$storageaccountname-cont"
     $vhd = Split-Path -Leaf $sourceVHDURI 
    
